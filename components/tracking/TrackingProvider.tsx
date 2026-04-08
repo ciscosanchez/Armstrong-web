@@ -29,7 +29,10 @@ function getOrCreateSessionId(): string {
     ?.split('=')[1];
   if (existing) return existing;
 
-  const id = crypto.randomUUID();
+  const id =
+    typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
   const maxAge = 60 * 60 * 24 * 30; // 30 days
   document.cookie = `${SESSION_COOKIE}=${id}; max-age=${maxAge}; path=/; SameSite=Strict`;
   return id;

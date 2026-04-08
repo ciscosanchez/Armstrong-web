@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * EasterEgg — type "HILLARY" anywhere on the page.
+ * EasterEgg — type "HILARY" anywhere on the page.
  *
  * Visual: the REAL Armstrong A symbol from armstrong-logo-header.svg,
  * rendered inline as Armstrong blue at 50% opacity. No PNG needed —
@@ -25,7 +25,7 @@ import { useEffect, useRef, useState } from 'react';
  * Dismisses on button click OR mouse move outside the inner card.
  */
 
-const TRIGGER = 'HILLARY';
+const TRIGGER = 'HILARY';
 
 /**
  * Real Armstrong A symbol path — verbatim from armstrong-logo-header.svg
