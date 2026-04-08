@@ -32,11 +32,12 @@ export default defineConfig({
   ],
 
   webServer: {
-    // Use plain webpack dev server in CI (no turbopack) — more stable for cold starts
-    command: process.env.CI ? 'npx next dev' : 'npm run dev',
+    // In CI: build then start (pre-compiled, no per-request compilation delays)
+    // Locally: reuse existing dev server
+    command: process.env.CI ? 'npm run build && npm run start' : 'npm run dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    // Extra time in CI for webpack initial compilation
-    timeout: process.env.CI ? 180_000 : 120_000,
+    // 5 min in CI to allow for next build
+    timeout: process.env.CI ? 300_000 : 120_000,
   },
 });

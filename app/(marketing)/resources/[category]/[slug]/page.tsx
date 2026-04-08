@@ -20,8 +20,12 @@ const CATEGORY_LABEL: Record<string, string> = {
 };
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((p) => ({ category: p.category, slug: p.slug.current }));
+  try {
+    const posts = await getBlogPosts();
+    return posts.map((p) => ({ category: p.category, slug: p.slug.current }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
