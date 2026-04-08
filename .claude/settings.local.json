@@ -44,7 +44,24 @@
       "Bash(node_modules/.bin/eslint \"app/\\(admin\\)/dashboard/analytics/page.tsx\" --max-warnings 0)",
       "Bash(node_modules/.bin/eslint . --max-warnings 0)",
       "Bash(echo \"EXIT: $?\")",
-      "Bash(node_modules/.bin/eslint \"app/\" \"components/\" \"lib/\" \"scripts/\" \"sanity/\" \"auth.ts\" \"middleware.ts\" \"next.config.ts\" \"tailwind.config.ts\" \"sanity.config.ts\" --max-warnings 0)"
+      "Bash(node_modules/.bin/eslint \"app/\" \"components/\" \"lib/\" \"scripts/\" \"sanity/\" \"auth.ts\" \"middleware.ts\" \"next.config.ts\" \"tailwind.config.ts\" \"sanity.config.ts\" --max-warnings 0)",
+      "Bash(gh repo:*)",
+      "Bash(export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\")",
+      "Bash(ssh -T git@github.com)",
+      "Bash(curl -s -X POST -H 'Accept: application/vnd.github+json' --user ciscosanchez https://api.github.com/user/repos -d '{\"name\":\"armstrong-web\",\"private\":true,\"description\":\"Armstrong Company website rebuild — goarmstrong.com \\(Next.js 15\\)\"}')",
+      "Bash(env)",
+      "Bash(node -e ':*)",
+      "Bash(security find-internet-password:*)",
+      "Bash(security find-generic-password:*)",
+      "Bash(curl -sL https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_macOS_arm64.zip -o /tmp/gh.zip)",
+      "Bash(unzip -q gh.zip)",
+      "Bash(/tmp/gh_2.67.0_macOS_arm64/bin/gh auth:*)",
+      "Bash(security dump-keychain:*)",
+      "Bash(cat ~/Library/Preferences/com.github.*.plist)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)\\)\")",
+      "Bash(npm test:*)",
+      "Bash(/Users/ciscosanchez/.nvm/versions/node/v22.22.2/bin/node:*)",
+      "Bash(npm list:*)"
     ]
   }
 }

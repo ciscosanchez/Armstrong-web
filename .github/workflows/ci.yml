@@ -45,6 +45,9 @@ jobs:
       # Turnstile — omitting keys triggers dev-bypass in TurnstileWidget
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: ''
       TURNSTILE_SECRET_KEY: ''
+      # Sentry — disabled in CI (no DSN = no reporting)
+      NEXT_PUBLIC_SENTRY_DSN: ''
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     services:
       postgres:
