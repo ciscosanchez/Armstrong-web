@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { LOCATIONS } from '@/lib/locations/data';
 import { LocationMap } from '@/components/sections/LocationMap';
 import { CTABanner } from '@/components/sections/CTABanner';
@@ -34,6 +35,33 @@ export default function OurLocationsPage() {
             Interactive location map
           </h2>
           <LocationMap locations={LOCATIONS} />
+        </div>
+      </section>
+
+      {/* Location grid — used by tests to verify 33+ location links */}
+      <section className="bg-armstrong-grey-3 py-12" aria-labelledby="locations-list-heading">
+        <div className="container-armstrong">
+          <h2
+            id="locations-list-heading"
+            className="text-armstrong-dark-blue mb-8 text-center text-2xl font-semibold"
+          >
+            Find your local Armstrong team
+          </h2>
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {LOCATIONS.map((loc) => (
+              <li key={loc.slug}>
+                <Link
+                  href={`/locations/${loc.slug}`}
+                  className="text-armstrong-dark-blue hover:text-armstrong-blue border-armstrong-grey-3 flex items-center justify-between rounded-lg border bg-white px-4 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-white"
+                >
+                  <span>
+                    {loc.city}, {loc.state}
+                  </span>
+                  <span className="text-armstrong-grey-1 text-xs">movers</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

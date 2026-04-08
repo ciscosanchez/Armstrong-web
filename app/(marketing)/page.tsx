@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Full-Service Moving, Storage and Logistics | The Armstrong Company',
   description:
     "Whether you're moving your household, your business, or your product, we do what it takes to get your goods where they need to go, across the block or around the globe.",
+  alternates: {
+    canonical: 'https://goarmstrong.com',
+  },
   openGraph: {
     title: 'The Armstrong Company — Our world moves around you.',
     description: 'Full-service moving, storage & logistics since 1957. 33+ locations nationwide.',

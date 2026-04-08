@@ -36,7 +36,7 @@ const SERVICES = [
 
 export function ServiceGrid() {
   return (
-    <section className="py-20" aria-labelledby="services-heading">
+    <section className="py-20" aria-label="Our services">
       <div className="container-armstrong">
         <div className="mb-12 text-center">
           <h2

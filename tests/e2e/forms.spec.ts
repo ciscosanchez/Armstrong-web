@@ -23,7 +23,7 @@ test.describe('Contact Form — /get-moving-with-armstrong', () => {
   test('shows validation errors when submitted empty', async ({ page }) => {
     await page.getByRole('button', { name: /submit|send|get.*quote/i }).click();
     await expect(page.getByText(/first name is required/i)).toBeVisible();
-    await expect(page.getByText(/email/i)).toBeVisible();
+    await expect(page.getByText(/valid email/i)).toBeVisible();
   });
 
   test('shows email format error on invalid email', async ({ page }) => {

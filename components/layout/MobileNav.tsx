@@ -54,7 +54,7 @@ export function MobileNav({ links }: MobileNavProps) {
         aria-label="Mobile navigation"
         className={[
           'fixed top-0 right-0 z-50 h-full w-80 max-w-[90vw] bg-white shadow-xl transition-transform duration-300 lg:hidden',
-          isOpen ? 'translate-x-0' : 'translate-x-full',
+          isOpen ? 'translate-x-0' : 'invisible translate-x-full',
         ].join(' ')}
       >
         <div className="flex h-16 items-center justify-between px-5">
