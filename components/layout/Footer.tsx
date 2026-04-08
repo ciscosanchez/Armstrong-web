@@ -41,6 +41,7 @@ export function Footer() {
                 alt="The Armstrong Company"
                 width={160}
                 height={36}
+                style={{ height: 'auto' }}
                 className="brightness-0 invert"
               />
             </Link>
