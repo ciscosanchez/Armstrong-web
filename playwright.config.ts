@@ -6,13 +6,18 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : 4,
-  reporter: process.env.CI ? 'github' : 'html',
+  reporter: process.env.CI ? [['github'], ['list']] : 'html',
+
+  // Longer timeouts in CI — cold webpack compilation on first page visit
+  timeout: process.env.CI ? 60_000 : 30_000,
 
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    navigationTimeout: process.env.CI ? 60_000 : 30_000,
+    actionTimeout: process.env.CI ? 30_000 : 15_000,
   },
 
   projects: [
@@ -27,9 +32,11 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    // Use plain webpack dev server in CI (no turbopack) — more stable for cold starts
+    command: process.env.CI ? 'npx next dev' : 'npm run dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    // Extra time in CI for webpack initial compilation
+    timeout: process.env.CI ? 180_000 : 120_000,
   },
 });
