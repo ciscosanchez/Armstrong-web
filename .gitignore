@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+
+# Production
+build/
+
+# Environment variables — NEVER commit real credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Prisma
+prisma/migrations/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Sentry
+.sentry-cli
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Fonts (woff2 files committed intentionally — exclude nothing here)
+# Exception: do NOT gitignore /public/fonts/
+
+# GeoIP database (large binary, download separately)
+data/GeoLite2-City.mmdb
+
+# Brand assets — large PDFs/PNGs, not for public repo
+sample/
+Armstrong_BrandGuidelines_V1.pdf

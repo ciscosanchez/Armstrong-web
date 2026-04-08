@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" fill="none">
+  <!-- Armstrong symbol: 3 concentric C-tracks opening to the right -->
+  <!-- Outer track (full height) -->
+  <path d="M90,8 H22 Q8,8 8,22 V78 Q8,92 22,92 H90"
+        stroke="#00263F" stroke-width="12" stroke-linecap="butt" fill="none"/>
+  <!-- Middle track -->
+  <path d="M90,24 H34 Q22,24 22,34 V66 Q22,76 34,76 H90"
+        stroke="#00263F" stroke-width="12" stroke-linecap="butt" fill="none"/>
+  <!-- Inner track -->
+  <path d="M90,40 H48 Q40,40 40,48 V52 Q40,60 48,60 H90"
+        stroke="#00263F" stroke-width="12" stroke-linecap="butt" fill="none"/>
+  <!-- Wordmark -->
+  <text x="108" y="65" font-family="'Inter', system-ui, -apple-system, sans-serif" font-size="44" font-weight="700" fill="#00263F" letter-spacing="-1">Armstrong</text>
+</svg>
