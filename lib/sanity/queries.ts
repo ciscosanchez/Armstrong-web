@@ -1,6 +1,8 @@
 import 'server-only';
 import { sanityClient } from './client';
 
+const sanityConfigured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+
 // ---------------------------------------------------------------------------
 // Blog Posts
 // ---------------------------------------------------------------------------
@@ -32,6 +34,7 @@ const BLOG_POST_CARD_FIELDS = `
 `;
 
 export async function getBlogPosts(category?: string): Promise<SanityBlogPost[]> {
+  if (!sanityConfigured) return [];
   const filter = category
     ? `*[_type == "blogPost" && category == $category && !(_id in path("drafts.**"))]`
     : `*[_type == "blogPost" && !(_id in path("drafts.**"))]`;
@@ -43,6 +46,7 @@ export async function getBlogPosts(category?: string): Promise<SanityBlogPost[]>
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<SanityBlogPost | null> {
+  if (!sanityConfigured) return null;
   return sanityClient.fetch<SanityBlogPost | null>(
     `*[_type == "blogPost" && slug.current == $slug && !(_id in path("drafts.**"))][0] {
       ${BLOG_POST_CARD_FIELDS},
@@ -78,6 +82,7 @@ export interface SanityCaseStudy {
 }
 
 export async function getCaseStudies(): Promise<SanityCaseStudy[]> {
+  if (!sanityConfigured) return [];
   return sanityClient.fetch<SanityCaseStudy[]>(
     `*[_type == "caseStudy" && !(_id in path("drafts.**"))] | order(publishedAt desc) {
       _id, title, slug, client, industry, service, excerpt, coverImage { asset, alt }, featured
@@ -88,6 +93,7 @@ export async function getCaseStudies(): Promise<SanityCaseStudy[]> {
 }
 
 export async function getCaseStudyBySlug(slug: string): Promise<SanityCaseStudy | null> {
+  if (!sanityConfigured) return null;
   return sanityClient.fetch<SanityCaseStudy | null>(
     `*[_type == "caseStudy" && slug.current == $slug && !(_id in path("drafts.**"))][0]`,
     { slug },
@@ -116,6 +122,7 @@ export interface SanityLocation {
 }
 
 export async function getSanityLocations(): Promise<SanityLocation[]> {
+  if (!sanityConfigured) return [];
   return sanityClient.fetch<SanityLocation[]>(
     `*[_type == "location" && active == true && !(_id in path("drafts.**"))] | order(city asc)`,
     {},
@@ -124,6 +131,7 @@ export async function getSanityLocations(): Promise<SanityLocation[]> {
 }
 
 export async function getSanityLocationBySlug(slug: string): Promise<SanityLocation | null> {
+  if (!sanityConfigured) return null;
   return sanityClient.fetch<SanityLocation | null>(
     `*[_type == "location" && slug.current == $slug && active == true && !(_id in path("drafts.**"))][0]`,
     { slug },
