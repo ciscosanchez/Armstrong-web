@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ContactFormSchema, type ContactFormInput } from '@/lib/validations/lead';
 import { useTracking } from '@/components/tracking/TrackingProvider';
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 
 const MOVE_TYPES = [
   { value: 'residential', label: 'Residential Moving' },
@@ -23,6 +24,7 @@ export function ContactForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<ContactFormInput>({
     resolver: zodResolver(ContactFormSchema),
@@ -287,6 +289,11 @@ export function ContactForm() {
           .
         </div>
       )}
+
+      <TurnstileWidget
+        onVerify={(token) => setValue('cfTurnstileResponse', token)}
+        onExpire={() => setValue('cfTurnstileResponse', '')}
+      />
 
       <button
         type="submit"

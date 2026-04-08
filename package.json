@@ -47,6 +47,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
     "react-is": "^19.2.4",
+    "react-turnstile": "^1.1.5",
     "resend": "^4.5.1",
     "sanity": "^3.75.1",
     "server-only": "^0.0.1",

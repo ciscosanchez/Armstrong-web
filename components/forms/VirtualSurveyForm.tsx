@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 
 const schema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -28,6 +29,7 @@ type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 export function VirtualSurveyForm() {
   const [status, setStatus] = useState<Status>('idle');
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const {
     register,
@@ -47,6 +49,7 @@ export function VirtualSurveyForm() {
           leadType: data.moveType === 'commercial' ? 'COMMERCIAL' : 'RESIDENTIAL',
           source: 'virtual_survey',
           message: `Virtual survey request. Preferred: ${data.preferredDate} ${data.preferredTime}. Notes: ${data.notes ?? ''}`,
+          cfTurnstileResponse: turnstileToken,
         }),
       });
       if (!res.ok) throw new Error('Submit failed');
@@ -280,6 +283,8 @@ export function VirtualSurveyForm() {
           Something went wrong. Please try again or call us directly.
         </p>
       )}
+
+      <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
 
       <button
         type="submit"

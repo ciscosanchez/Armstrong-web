@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 
 const schema = z.object({
   companyName: z.string().min(2, 'Company name required'),
@@ -96,6 +97,7 @@ const US_STATES = [
 
 export function CreditApplicationForm() {
   const [status, setStatus] = useState<Status>('idle');
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const {
     register,
@@ -119,6 +121,7 @@ export function CreditApplicationForm() {
           leadType: 'COMMERCIAL',
           source: 'credit_application',
           message: `Credit application: ${data.requestedTerms} / $${data.requestedLimit}. Tax ID: ${data.federalTaxId ?? 'N/A'}. Annual revenue: ${data.annualRevenue}.`,
+          cfTurnstileResponse: turnstileToken,
         }),
       });
       if (!res.ok) throw new Error('Submit failed');
@@ -401,6 +404,8 @@ export function CreditApplicationForm() {
           Something went wrong. Please try again or call us directly.
         </p>
       )}
+
+      <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
 
       <button
         type="submit"
