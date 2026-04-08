@@ -5,44 +5,48 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * EasterEgg — type "HILLARY" anywhere to summon the Armstrong truck.
  *
- * Track: the three C-arcs from armstrong-logo.svg stitched into one closed loop.
- *   Outer arc  → straight bridge (right side, going down) →
- *   Middle arc (reversed) → straight bridge (going down) →
- *   Inner arc  → straight bridge (going up, back to outer start)
+ * Visual: the actual armstrong-symbol.png rendered at 20% opacity as a track.
+ * Track path: mirrored C-arcs (curves on RIGHT, open ends on LEFT) stitched
+ *   into one closed loop — outer → bridge → middle reversed → bridge → inner → bridge home.
+ * The bridges are straight segments on the LEFT side where the arcs are open.
  *
- * The logo symbol is drawn as a faded backdrop; the truck animates over it.
- * Dismisses on button click OR any mouse move outside the card.
+ * Cab is on the truck's +x axis. SVG animateMotion rotate="auto" aligns +x
+ * with the direction of travel, so the cab always leads.
+ *
+ * Dismiss: button click OR any mouse move outside the card.
  */
 
 const TRIGGER = 'HILLARY';
 
-// Exact path data copied from public/images/armstrong-logo.svg (viewBox 0 0 100 100 region)
-const OUTER = 'M90,8 H22 Q8,8 8,22 V78 Q8,92 22,92 H90';
-const MIDDLE = 'M90,24 H34 Q22,24 22,34 V66 Q22,76 34,76 H90';
-const INNER = 'M90,40 H48 Q40,40 40,48 V52 Q40,60 48,60 H90';
-
 /**
- * One continuous closed track that visits all three arcs:
- *   1. Outer arc (top-right → around left → bottom-right)
- *   2. Bridge: straight line up the right gap from outer-bottom to middle-bottom
- *   3. Middle arc reversed (bottom-right → around left → top-right)
- *   4. Bridge: straight line down to inner-top
- *   5. Inner arc (top-right → around left → bottom-right)
- *   6. Bridge: straight line back up to outer-top — closes the loop
+ * Mirrored arc paths — curves on RIGHT, open on LEFT.
+ * These match the orientation of the real armstrong-symbol.png.
+ *
+ * Outer:  M10,8  H78 Q92,8  92,22 V78 Q92,92 78,92 H10
+ * Middle: M10,24 H66 Q78,24 78,34 V66 Q78,76 66,76 H10
+ * Inner:  M10,40 H52 Q60,40 60,48 V52 Q60,60 52,60 H10
+ *
+ * Combined loop — visits all three arcs in one continuous closed path:
+ *   1. Outer arc (top-left → right curve → bottom-left)
+ *   2. Bridge LEFT side: (10,92) → (10,76)       — connects outer-bottom to middle-bottom
+ *   3. Middle arc REVERSED (bottom-left → right curve → top-left)
+ *   4. Bridge LEFT side: (10,24) → (10,40)       — connects middle-top to inner-top
+ *   5. Inner arc (top-left → right curve → bottom-left)
+ *   6. Bridge LEFT side: (10,60) → (10,8)        — closes back to outer-top
  */
 const LOOP_TRACK =
   // 1. Outer arc
-  'M90,8 H22 Q8,8 8,22 V78 Q8,92 22,92 H90 ' +
-  // 2. Bridge to middle-bottom (right side, going up)
-  'L90,76 ' +
-  // 3. Middle arc — reversed so truck continues forward without a U-turn
-  'H34 Q22,76 22,66 V34 Q22,24 34,24 H90 ' +
-  // 4. Bridge to inner-top (right side, going down)
-  'L90,40 ' +
+  'M10,8 H78 Q92,8 92,22 V78 Q92,92 78,92 H10 ' +
+  // 2. Bridge to middle-bottom
+  'L10,76 ' +
+  // 3. Middle arc reversed
+  'H66 Q78,76 78,66 V34 Q78,24 66,24 H10 ' +
+  // 4. Bridge to inner-top
+  'L10,40 ' +
   // 5. Inner arc
-  'H48 Q40,40 40,48 V52 Q40,60 48,60 H90 ' +
-  // 6. Bridge back to outer-top — closes the loop
-  'L90,8 Z';
+  'H52 Q60,40 60,48 V52 Q60,60 52,60 H10 ' +
+  // 6. Bridge back to outer-top — closes loop
+  'L10,8 Z';
 
 export function EasterEgg() {
   const [visible, setVisible] = useState(false);
@@ -94,65 +98,49 @@ export function EasterEgg() {
         </p>
 
         {/*
-          SVG display — viewBox matches the logo symbol coordinate space (0 0 100 100).
-          Layer 1 (behind): the three C-arcs drawn faded — this IS the logo.
-          Layer 2 (hidden): the combined loop path used only for animateMotion.
-          Layer 3 (front):  the truck, animated along the loop.
+          SVG container — viewBox 0 0 100 100.
+
+          Layer 1: The actual Armstrong symbol PNG, lightened to 20% opacity.
+                   This IS the visual track — we don't draw any extra SVG strokes.
+          Layer 2: Hidden <path> that defines the animation route for animateMotion.
+          Layer 3: The truck, animated along the loop.
         */}
         <div className="h-80 w-80">
           <svg
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
             className="h-full w-full"
             aria-hidden="true"
           >
-            {/* ── Layer 1: The Armstrong symbol — faded backdrop ─────────── */}
-            {/* Outer C-arc */}
-            <path
-              d={OUTER}
-              stroke="#00A4EB"
-              strokeWidth="5"
-              strokeLinecap="butt"
-              fill="none"
-              opacity="0.25"
-            />
-            {/* Middle C-arc */}
-            <path
-              d={MIDDLE}
-              stroke="#00A4EB"
-              strokeWidth="5"
-              strokeLinecap="butt"
-              fill="none"
-              opacity="0.25"
-            />
-            {/* Inner C-arc */}
-            <path
-              d={INNER}
-              stroke="#00A4EB"
-              strokeWidth="5"
-              strokeLinecap="butt"
-              fill="none"
-              opacity="0.25"
+            {/* ── Layer 1: The real Armstrong symbol, faded ─────────────── */}
+            <image
+              href="/images/armstrong-symbol.png"
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              opacity="0.2"
+              preserveAspectRatio="xMidYMid meet"
             />
 
-            {/* ── Layer 2: The hidden combined loop track ────────────────── */}
+            {/* ── Layer 2: Hidden animation track ───────────────────────── */}
             <path id="ee-loop" d={LOOP_TRACK} fill="none" stroke="none" />
 
             {/*
               ── Layer 3: Truck ─────────────────────────────────────────────
-              Cab is on the +x (right) side so rotate="auto" keeps it facing
-              the direction of travel. scale(0.22) fits the truck on the
-              narrowest arc (inner, only 20 units tall).
+              Cab on +x axis so rotate="auto" keeps the front leading.
+              scale(0.22) — sized to fit through the narrow inner arc.
 
-              At 1× layout:
-                Box (cargo, back):  x = -22 … -2
-                Cab (front, +x):    x = -2  … 14
-                Wheels:             cx = -12, cx = 8
+              1× layout:
+                Cargo box (back):   x = −22 … −2
+                Cab (front, +x):    x = −2  … +14
+                Wheels:             cx = −12, cx = +8
             */}
             <g id="ee-truck" transform="scale(0.22)">
               {/* Cargo box */}
               <rect x="-22" y="-9" width="20" height="13" rx="1" fill="#ffffff" />
-              {/* Armstrong-blue stripe on box */}
+              {/* Armstrong-blue stripe */}
               <rect x="-22" y="-2" width="20" height="4" fill="#00A4EB" />
               {/* Cab */}
               <rect x="-2" y="-9" width="16" height="12" rx="2" fill="#f0f0f0" />
@@ -166,7 +154,7 @@ export function EasterEgg() {
               <circle cx="8" cy="5" r="2" fill="#d0d0d0" />
             </g>
 
-            {/* Animate truck along the full loop — 7 s to cover all three arcs */}
+            {/* Animate truck — 7 s per full outer + middle + inner circuit */}
             <use href="#ee-truck">
               <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
                 <mpath href="#ee-loop" />
