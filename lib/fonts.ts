@@ -1,19 +1,38 @@
-/**
- * TEMPORARY: Using Inter from Google Fonts as a stand-in for Uncut Sans.
- *
- * TO SWITCH TO UNCUT SANS (brand-correct):
- * 1. Download .woff2 files from https://github.com/kaspernordkvist/uncut_sans
- * 2. Place them in /public/fonts/uncut-sans/
- * 3. Swap this file to use localFont (the config is in git history / see ARCHITECTURE.md)
- *
- * Inter is visually similar (geometric sans-serif) and holds the same CSS variable
- * --font-uncut-sans so no other files need to change on the swap.
- */
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
-export const uncutSans = Inter({
-  subsets: ['latin'],
+export const uncutSans = localFont({
+  src: [
+    {
+      path: '../public/fonts/uncut-sans/UncutSans-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/uncut-sans/UncutSans-Book.woff2',
+      weight: '350',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/uncut-sans/UncutSans-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/uncut-sans/UncutSans-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/uncut-sans/UncutSans-Semibold.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/uncut-sans/UncutSans-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
   variable: '--font-uncut-sans',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
 });
