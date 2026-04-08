@@ -81,15 +81,14 @@ jobs:
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
-        working-directory: tests
 
       - name: Run Playwright tests (Chromium only in CI)
-        run: npx playwright test --config tests/playwright.config.ts --project=chromium
+        run: npx playwright test --project=chromium
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: playwright-report
-          path: tests/playwright-report/
+          path: playwright-report/
           retention-days: 7

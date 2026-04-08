@@ -28,7 +28,11 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<ContactFormInput>({
     resolver: zodResolver(ContactFormSchema),
-    defaultValues: { type: 'residential' },
+    defaultValues: {
+      type: 'residential',
+      // Pre-set bypass token when Turnstile is not configured (dev/test)
+      cfTurnstileResponse: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? '' : 'dev-bypass',
+    },
     mode: 'onBlur',
   });
 
