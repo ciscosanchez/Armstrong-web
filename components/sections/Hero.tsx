@@ -22,13 +22,13 @@ export function Hero({
 }: HeroProps) {
   return (
     <section
-      className="bg-armstrong-dark-blue relative min-h-[600px] overflow-hidden"
+      className={[
+        'relative min-h-[600px] overflow-hidden',
+        imageSrc
+          ? 'bg-armstrong-dark-blue'
+          : 'from-armstrong-dark-blue via-armstrong-dark-blue-mid to-armstrong-dark-blue bg-gradient-to-br',
+      ].join(' ')}
       aria-label="Hero"
-      style={{
-        backgroundImage: !imageSrc
-          ? 'linear-gradient(135deg, #00263F 0%, #003d5c 50%, #00263F 100%)'
-          : undefined,
-      }}
     >
       {/* Background image — only rendered when a real image is provided */}
       {imageSrc && (
@@ -76,7 +76,7 @@ export function Hero({
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href={primaryCta.href}
-                className="bg-armstrong-blue rounded-md px-7 py-3.5 text-center font-semibold text-white transition-colors hover:bg-[#0090d0] focus-visible:outline-2"
+                className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded-md px-7 py-3.5 text-center font-semibold text-white transition-colors focus-visible:outline-2"
               >
                 {primaryCta.label}
               </Link>
@@ -102,7 +102,7 @@ export function Hero({
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href={primaryCta.href}
-                className="bg-armstrong-blue rounded-md px-7 py-3.5 text-center font-semibold text-white transition-colors hover:bg-[#0090d0] focus-visible:outline-2"
+                className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded-md px-7 py-3.5 text-center font-semibold text-white transition-colors focus-visible:outline-2"
               >
                 {primaryCta.label}
               </Link>

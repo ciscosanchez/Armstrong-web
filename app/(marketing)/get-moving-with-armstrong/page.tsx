@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { ContactForm } from '@/components/forms/ContactForm';
+import { ArmstrongIcon } from '@/components/ui/ArmstrongIcon';
 
 export const metadata: Metadata = {
   title: 'Book Packing and Moving Services',
@@ -42,7 +43,8 @@ export default function GetMovingPage() {
                       href="tel:+18002887396"
                       className="text-armstrong-blue flex items-center gap-2 font-medium hover:underline"
                     >
-                      📞 Call 800-288-7396
+                      <ArmstrongIcon name="head" className="h-4 w-4 shrink-0" />
+                      Call 800-288-7396
                     </a>
                   </li>
                   <li>
@@ -50,7 +52,8 @@ export default function GetMovingPage() {
                       href="/ballpark-estimate"
                       className="text-armstrong-blue flex items-center gap-2 font-medium hover:underline"
                     >
-                      💰 Get a Ballpark Estimate
+                      <ArmstrongIcon name="money-1" className="h-4 w-4 shrink-0" />
+                      Get a Ballpark Estimate
                     </a>
                   </li>
                   <li>
@@ -58,7 +61,8 @@ export default function GetMovingPage() {
                       href="/virtual-survey"
                       className="text-armstrong-blue flex items-center gap-2 font-medium hover:underline"
                     >
-                      📅 Schedule a Virtual Survey
+                      <ArmstrongIcon name="calendar" className="h-4 w-4 shrink-0" />
+                      Schedule a Virtual Survey
                     </a>
                   </li>
                 </ul>

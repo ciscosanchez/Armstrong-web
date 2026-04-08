@@ -410,7 +410,7 @@ export function CreditApplicationForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="bg-armstrong-blue w-full rounded-lg py-3 font-semibold text-white transition-opacity hover:bg-[#0090d0] disabled:opacity-50"
+        className="bg-armstrong-blue hover:bg-armstrong-blue-hover w-full rounded-lg py-3 font-semibold text-white transition-opacity disabled:opacity-50"
       >
         {status === 'submitting' ? 'Submitting...' : 'Submit Credit Application'}
       </button>

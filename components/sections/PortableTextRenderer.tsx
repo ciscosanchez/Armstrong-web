@@ -50,7 +50,7 @@ const components: PortableTextComponents = {
         href={value?.href}
         target={value?.blank ? '_blank' : undefined}
         rel={value?.blank ? 'noopener noreferrer' : undefined}
-        className="text-armstrong-blue underline underline-offset-2 hover:text-[#0090d0]"
+        className="text-armstrong-blue hover:text-armstrong-blue-hover underline underline-offset-2"
       >
         {children}
       </a>

@@ -205,7 +205,7 @@ export function SuppliesEstimator() {
           <div className="mt-4 flex flex-wrap gap-3">
             <Link
               href="/get-moving-with-armstrong"
-              className="bg-armstrong-blue inline-block rounded-md px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0090d0]"
+              className="bg-armstrong-blue hover:bg-armstrong-blue-hover inline-block rounded-md px-5 py-2.5 text-sm font-semibold text-white"
             >
               Book a Move & Supplies Package
             </Link>
@@ -309,7 +309,7 @@ export function SuppliesEstimator() {
       <button
         onClick={() => dispatch({ type: 'CALCULATE' })}
         disabled={totalRooms === 0}
-        className="bg-armstrong-blue w-full rounded-lg py-3 font-semibold text-white transition-opacity hover:bg-[#0090d0] disabled:opacity-40"
+        className="bg-armstrong-blue hover:bg-armstrong-blue-hover w-full rounded-lg py-3 font-semibold text-white transition-opacity disabled:opacity-40"
       >
         {totalRooms === 0 ? 'Add at least one room to continue' : 'Calculate My Supply List'}
       </button>

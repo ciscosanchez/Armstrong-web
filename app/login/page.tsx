@@ -69,7 +69,7 @@ export default function LoginPage() {
           <input name="callbackUrl" type="hidden" value="/dashboard/leads" />
           <button
             type="submit"
-            className="bg-armstrong-blue w-full rounded-lg py-3 font-semibold text-white hover:bg-[#0090d0]"
+            className="bg-armstrong-blue hover:bg-armstrong-blue-hover w-full rounded-lg py-3 font-semibold text-white"
           >
             Send magic link
           </button>

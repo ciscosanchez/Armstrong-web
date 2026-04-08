@@ -1,5 +1,8 @@
+import { ArmstrongIcon } from '@/components/ui/ArmstrongIcon';
+import type { ArmstrongIconName } from '@/components/ui/ArmstrongIcon';
+
 interface Feature {
-  icon: string;
+  icon: ArmstrongIconName;
   title: string;
   description: string;
 }
@@ -16,9 +19,11 @@ export function ServiceFeatureGrid({ features }: ServiceFeatureGridProps) {
           key={feature.title}
           className="border-armstrong-grey-3 rounded-xl border bg-white p-6 shadow-sm"
         >
-          <span className="mb-4 block text-3xl" aria-hidden="true">
-            {feature.icon}
-          </span>
+          <ArmstrongIcon
+            name={feature.icon}
+            className="text-armstrong-blue mb-4 h-10 w-10"
+            aria-hidden="true"
+          />
           <h3 className="text-armstrong-dark-blue mb-2 font-semibold">{feature.title}</h3>
           <p className="text-armstrong-grey-1 text-sm leading-relaxed">{feature.description}</p>
         </div>

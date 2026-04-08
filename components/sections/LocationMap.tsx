@@ -165,8 +165,7 @@ export function LocationMap({ locations }: LocationMapProps) {
         {/* Map container */}
         <div
           ref={mapRef}
-          className="border-armstrong-grey-3 relative overflow-hidden rounded-xl border shadow-sm"
-          style={{ height: '480px' }}
+          className="border-armstrong-grey-3 relative h-[480px] overflow-hidden rounded-xl border shadow-sm"
           aria-label={`Map of Armstrong locations — ${filteredLocations.length} shown`}
         />
 
@@ -259,7 +258,7 @@ function LocationDetail({ location, onClose }: { location: LocationData; onClose
       <div className="flex flex-col gap-2">
         <Link
           href={`/locations/${location.slug}`}
-          className="bg-armstrong-blue block rounded-md px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-[#0090d0]"
+          className="bg-armstrong-blue hover:bg-armstrong-blue-hover block rounded-md px-4 py-2.5 text-center text-sm font-semibold text-white"
         >
           View {location.city} office
         </Link>

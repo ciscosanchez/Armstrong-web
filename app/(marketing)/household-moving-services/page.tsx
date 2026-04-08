@@ -1,52 +1,15 @@
 import type { Metadata } from 'next';
-import { Hero } from '@/components/sections/Hero';
+import Image from 'next/image';
+import Link from 'next/link';
 import { CTABanner } from '@/components/sections/CTABanner';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
-import { ServiceFeatureGrid } from '@/components/sections/ServiceFeatureGrid';
+import { ResidentialMovingTabs } from '@/components/sections/ResidentialMovingTabs';
 
 export const metadata: Metadata = {
   title: 'Residential Moving Services',
   description:
     'Our residential moving services include everything you need for a smooth move: packing, unpacking, storage, and valuation coverage. The Armstrong Company — est. 1957.',
 };
-
-const FEATURES = [
-  {
-    icon: '📦',
-    title: 'Full-service packing',
-    description:
-      'Our crew handles everything — wrapping, boxing, labeling — so you can focus on your next chapter.',
-  },
-  {
-    icon: '🚚',
-    title: 'Local & long-distance moves',
-    description:
-      "Whether you're moving across the block or across the country, we've got the fleet and the team.",
-  },
-  {
-    icon: '🗄️',
-    title: 'Short & long-term storage',
-    description:
-      "Climate-controlled facilities in 33+ locations nationwide. Your things stay safe until you're ready.",
-  },
-  {
-    icon: '🛋️',
-    title: 'Furniture assembly & placement',
-    description: "We don't just drop and run. We set up every room the way you want it.",
-  },
-  {
-    icon: '🎹',
-    title: 'Specialty items',
-    description:
-      'Pianos, antiques, artwork, wine collections — handled by specialists, not just movers.',
-  },
-  {
-    icon: '🌍',
-    title: 'International relocation',
-    description:
-      'Moving abroad? We coordinate customs, shipping, and destination services end-to-end.',
-  },
-] as const;
 
 const BREADCRUMBS = [
   { label: 'Home', href: '/' },
@@ -57,51 +20,56 @@ const BREADCRUMBS = [
 export default function HouseholdMovingPage() {
   return (
     <>
-      <div className="bg-armstrong-dark-blue pt-8 pb-0">
-        <div className="container-armstrong">
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      <section className="bg-armstrong-dark-blue relative min-h-[480px] overflow-hidden text-white">
+        <Image
+          src="/images/res-hero.jpg"
+          alt="Armstrong residential movers"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        <div className="container-armstrong relative py-20">
           <Breadcrumb items={BREADCRUMBS} variant="dark" />
-        </div>
-      </div>
-
-      <Hero
-        headline="You make it home. We make it happen."
-        subhead="As a full-service global moving company, we help you make the most of your next big move. Whether you're a new homeowner moving across town or relocating across the globe, count on us to get personal and essential goods wherever they need to go."
-        primaryCta={{
-          label: 'Get a Free Quote',
-          href: '/get-moving-with-armstrong?type=residential',
-        }}
-        secondaryCta={{ label: 'Ballpark Estimate', href: '/ballpark-estimate' }}
-      />
-
-      {/* Features */}
-      <section className="py-20" aria-labelledby="residential-features-heading">
-        <div className="container-armstrong">
-          <div className="mb-12 max-w-2xl">
-            <p className="text-armstrong-blue mb-2 text-sm font-semibold tracking-wider uppercase">
-              Residential Services
-            </p>
-            <h2
-              id="residential-features-heading"
-              className="text-armstrong-dark-blue mb-4 text-3xl font-semibold lg:text-4xl"
+          <h1 className="mt-6 max-w-2xl text-4xl leading-tight font-semibold lg:text-5xl">
+            You make it home. We make it happen.
+          </h1>
+          <p className="text-armstrong-grey-2 mt-4 max-w-xl text-lg leading-relaxed">
+            As a full-service global moving company, we help you make the most of your next big
+            move. Whether you&apos;re a new homeowner moving across town or relocating across the
+            globe, count on us to get your personal and essential goods wherever they need to go.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/get-moving-with-armstrong?type=residential"
+              className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded-full px-8 py-3.5 font-semibold text-white transition-colors"
             >
-              Everything your move needs. Nothing it doesn&apos;t.
-            </h2>
-            <p className="text-armstrong-grey-1">
-              We&apos;ve been in this business long enough to hear all the stories — promises that
-              weren&apos;t kept, vendors that didn&apos;t listen. Those people didn&apos;t hire The
-              Armstrong Company.
-            </p>
+              Get a Free Quote
+            </Link>
+            <Link
+              href="#res-tabs"
+              className="rounded-full border border-white/40 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"
+            >
+              Explore Services
+            </Link>
           </div>
-          <ServiceFeatureGrid features={FEATURES} />
         </div>
       </section>
 
-      {/* Process */}
-      <section className="border-armstrong-grey-3 bg-armstrong-grey-3 border-t py-20">
+      {/* ── Interactive service tabs ───────────────────────────────────── */}
+      <div id="res-tabs">
+        <ResidentialMovingTabs />
+      </div>
+
+      {/* ── How your move works ───────────────────────────────────────── */}
+      <section className="bg-armstrong-grey-3 py-20">
         <div className="container-armstrong">
-          <h2 className="text-armstrong-dark-blue mb-10 text-center text-3xl font-semibold">
-            How your move works
-          </h2>
+          <div className="mb-12 text-center">
+            <p className="text-armstrong-blue mb-3 text-sm font-semibold tracking-widest uppercase">
+              The Process
+            </p>
+            <h2 className="text-armstrong-dark-blue text-3xl font-semibold">How your move works</h2>
+          </div>
           <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS_STEPS.map((step, i) => (
               <li key={step.title} className="rounded-xl bg-white p-6 shadow-sm">
@@ -116,12 +84,66 @@ export default function HouseholdMovingPage() {
         </div>
       </section>
 
+      {/* ── Certifications & memberships ─────────────────────────────── */}
+      <section className="py-16">
+        <div className="container-armstrong">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="relative h-72 overflow-hidden rounded-2xl shadow-md">
+              <Image
+                src="/images/res-longdist2.png"
+                alt="Armstrong long-distance moving truck"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-armstrong-blue mb-3 text-sm font-semibold tracking-widest uppercase">
+                Certified & Accredited
+              </p>
+              <h2 className="text-armstrong-dark-blue mb-4 text-3xl font-semibold">
+                Moving you with the highest standards in the industry
+              </h2>
+              <p className="text-armstrong-grey-1 mb-6 text-base leading-relaxed">
+                Armstrong holds memberships and certifications across the globe — ensuring your move
+                meets rigorous quality, compliance, and safety standards wherever you&apos;re
+                headed.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {CERTIFICATIONS.map((cert) => (
+                  <span
+                    key={cert}
+                    className="border-armstrong-grey-3 text-armstrong-dark-blue rounded-full border bg-white px-5 py-2 text-sm font-medium shadow-sm"
+                  >
+                    {cert}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Proof strip ───────────────────────────────────────────────── */}
+      <section className="bg-armstrong-dark-blue py-16 text-white">
+        <div className="container-armstrong">
+          <div className="grid gap-8 sm:grid-cols-4">
+            {STATS.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-armstrong-blue mb-1 text-4xl font-bold">{stat.value}</p>
+                <p className="font-semibold">{stat.label}</p>
+                <p className="text-armstrong-grey-2 mt-1 text-sm">{stat.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTABanner
         headline="Your home is where our heart is."
         subhead="Let's make the most of your next move. Talk to an expert today."
         cta={{ label: 'Get a Free Quote', href: '/get-moving-with-armstrong?type=residential' }}
         secondaryCta={{ label: 'Schedule a Survey', href: '/virtual-survey' }}
-        variant="dark"
+        variant="blue"
       />
     </>
   );
@@ -148,3 +170,21 @@ const PROCESS_STEPS = [
     description: 'We unpack, assemble, and place. You just decide where things go.',
   },
 ];
+
+const CERTIFICATIONS = [
+  'FIDI Certified',
+  'IAMX Member',
+  'LACMA Member',
+  'Worldwide ERC Member',
+  'CTPAT Certified',
+  'FAIM Accredited',
+  'ISO 9001 Certified',
+  'ProMover Member',
+] as const;
+
+const STATS = [
+  { value: '65+', label: 'Years of service', description: 'Est. 1957' },
+  { value: '33+', label: 'Locations nationwide', description: 'Wherever you are' },
+  { value: '50K+', label: 'Families moved', description: 'And counting' },
+  { value: '4.8★', label: 'Customer rating', description: 'Award-winning service' },
+] as const;

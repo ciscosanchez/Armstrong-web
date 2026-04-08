@@ -30,7 +30,7 @@ export default function GlobalError({ error, reset }: ErrorProps) {
       </p>
       <button
         onClick={reset}
-        className="bg-armstrong-blue rounded-md px-6 py-3 font-semibold text-white transition-colors hover:bg-[#0090d0]"
+        className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded-md px-6 py-3 font-semibold text-white transition-colors"
       >
         Try again
       </button>

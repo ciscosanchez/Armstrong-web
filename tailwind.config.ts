@@ -8,7 +8,9 @@ const config: Config = {
         // Armstrong Brand Colors — Brand Guidelines §3.6
         armstrong: {
           'dark-blue': '#00263F',
+          'dark-blue-mid': '#003d5c',
           blue: '#00a4eb',
+          'blue-hover': '#0090d0',
           'light-blue': '#9ad7f9',
           'grey-1': '#69829e',
           'grey-2': '#9eaec0',

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { CTABanner } from '@/components/sections/CTABanner';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
+import { ArmstrongIcon } from '@/components/ui/ArmstrongIcon';
+import type { ArmstrongIconName } from '@/components/ui/ArmstrongIcon';
 
 export const metadata: Metadata = {
   title: 'Sustainability | The Armstrong Company',
@@ -37,9 +39,11 @@ export default function SustainabilityPage() {
                 key={item.title}
                 className="border-armstrong-grey-3 rounded-xl border bg-white p-6 shadow-sm"
               >
-                <span className="mb-4 block text-2xl" aria-hidden="true">
-                  {item.icon}
-                </span>
+                <ArmstrongIcon
+                  name={item.icon}
+                  className="text-armstrong-blue mb-4 h-10 w-10"
+                  aria-hidden="true"
+                />
                 <h3 className="text-armstrong-dark-blue mb-2 font-semibold">{item.title}</h3>
                 <p className="text-armstrong-grey-1 text-sm leading-relaxed">{item.description}</p>
               </div>
@@ -58,27 +62,27 @@ export default function SustainabilityPage() {
   );
 }
 
-const INITIATIVES = [
+const INITIATIVES: { icon: ArmstrongIconName; title: string; description: string }[] = [
   {
-    icon: '🚛',
+    icon: 'truck-3',
     title: 'Fleet efficiency',
     description:
       'Modern, fuel-efficient trucks with regular maintenance schedules to minimize emissions per mile.',
   },
   {
-    icon: '♻️',
+    icon: 'boxes',
     title: 'Sustainable packing',
     description:
       'Reusable crates, recycled cardboard, and eco-friendly wrapping materials wherever possible.',
   },
   {
-    icon: '🏭',
+    icon: 'buildings',
     title: 'Green facilities',
     description:
       'LED lighting, solar where available, and energy management systems across our warehouse network.',
   },
   {
-    icon: '🌱',
+    icon: 'globe',
     title: 'Carbon reduction',
     description:
       'Ongoing investment in route optimization and load consolidation to reduce our carbon footprint.',

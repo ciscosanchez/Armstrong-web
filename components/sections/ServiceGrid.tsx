@@ -71,7 +71,7 @@ export function ServiceGrid() {
               </p>
               <Link
                 href={service.href}
-                className="text-armstrong-blue inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2 hover:text-[#0090d0]"
+                className="text-armstrong-blue hover:text-armstrong-blue-hover inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2"
               >
                 Learn about {service.cta}
                 <ArrowIcon />

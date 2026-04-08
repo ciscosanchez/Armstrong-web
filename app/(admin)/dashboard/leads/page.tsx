@@ -84,7 +84,7 @@ export default async function LeadsDashboardPage({ searchParams }: Props) {
         </div>
         <a
           href="/api/leads/export"
-          className="bg-armstrong-blue rounded-md px-4 py-2 text-sm font-semibold text-white hover:bg-[#0090d0]"
+          className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded-md px-4 py-2 text-sm font-semibold text-white"
         >
           Export CSV
         </a>

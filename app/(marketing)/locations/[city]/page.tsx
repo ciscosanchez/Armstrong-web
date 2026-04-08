@@ -60,7 +60,7 @@ export default async function LocationPage({ params }: PageProps) {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href={`/get-moving-with-armstrong?city=${location.slug}`}
-              className="bg-armstrong-blue rounded-md px-6 py-3 font-semibold text-white hover:bg-[#0090d0]"
+              className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded-md px-6 py-3 font-semibold text-white"
             >
               Get a Free Quote
             </Link>

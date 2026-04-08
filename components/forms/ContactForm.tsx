@@ -83,7 +83,7 @@ export function ContactForm() {
         <div className="mt-6 flex flex-col gap-2 sm:flex-row">
           <a
             href="/ballpark-estimate"
-            className="bg-armstrong-blue rounded-md px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0090d0]"
+            className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded-md px-5 py-2.5 text-sm font-semibold text-white"
           >
             Get a Ballpark Estimate
           </a>
@@ -298,7 +298,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="bg-armstrong-blue w-full rounded-md px-6 py-3.5 font-semibold text-white transition-colors hover:bg-[#0090d0] disabled:cursor-not-allowed disabled:opacity-60"
+        className="bg-armstrong-blue hover:bg-armstrong-blue-hover w-full rounded-md px-6 py-3.5 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Get My Free Quote'}
       </button>

@@ -101,7 +101,7 @@ export default function FinancingPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/credit-application"
-                className="bg-armstrong-blue inline-block rounded-md px-6 py-3 font-semibold text-white hover:bg-[#0090d0]"
+                className="bg-armstrong-blue hover:bg-armstrong-blue-hover inline-block rounded-md px-6 py-3 font-semibold text-white"
               >
                 Apply for Credit
               </Link>

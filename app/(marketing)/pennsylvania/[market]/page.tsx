@@ -194,7 +194,7 @@ export default async function PAMarketPage({ params }: Props) {
               <p className="text-armstrong-grey-2 mt-3 text-sm">Mon–Fri 8am–6pm · Sat 9am–2pm</p>
               <a
                 href="/get-moving-with-armstrong"
-                className="bg-armstrong-blue mt-5 inline-block w-full rounded-md px-6 py-3 text-center font-semibold text-white hover:bg-[#0090d0]"
+                className="bg-armstrong-blue hover:bg-armstrong-blue-hover mt-5 inline-block w-full rounded-md px-6 py-3 text-center font-semibold text-white"
               >
                 Get a Free Quote
               </a>

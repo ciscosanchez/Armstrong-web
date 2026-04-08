@@ -194,7 +194,7 @@ function Step1({
       <button
         onClick={onNext}
         disabled={!data.moveType}
-        className="bg-armstrong-blue mt-5 w-full rounded-md px-6 py-3 font-semibold text-white hover:bg-[#0090d0] disabled:cursor-not-allowed disabled:opacity-50"
+        className="bg-armstrong-blue hover:bg-armstrong-blue-hover mt-5 w-full rounded-md px-6 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
         Next →
       </button>
@@ -268,7 +268,7 @@ function Step2({
         <button
           onClick={onNext}
           disabled={!valid}
-          className="bg-armstrong-blue flex-[2] rounded-md px-6 py-3 font-semibold text-white hover:bg-[#0090d0] disabled:cursor-not-allowed disabled:opacity-50"
+          className="bg-armstrong-blue hover:bg-armstrong-blue-hover flex-[2] rounded-md px-6 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
         >
           Next →
         </button>
@@ -329,7 +329,7 @@ function Step3({
         <button
           onClick={onNext}
           disabled={!data.homeSizeTier}
-          className="bg-armstrong-blue flex-[2] rounded-md px-6 py-3 font-semibold text-white hover:bg-[#0090d0] disabled:cursor-not-allowed disabled:opacity-50"
+          className="bg-armstrong-blue hover:bg-armstrong-blue-hover flex-[2] rounded-md px-6 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
         >
           Next →
         </button>
@@ -418,7 +418,7 @@ function Step4({
         <button
           onClick={onSubmit}
           disabled={loading}
-          className="bg-armstrong-blue flex-[2] rounded-md px-6 py-3 font-semibold text-white hover:bg-[#0090d0] disabled:cursor-not-allowed disabled:opacity-60"
+          className="bg-armstrong-blue hover:bg-armstrong-blue-hover flex-[2] rounded-md px-6 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading ? 'Calculating…' : 'Get My Estimate →'}
         </button>
@@ -466,7 +466,7 @@ function ResultStep({ result, data }: { result: EstimateResult; data: Partial<Es
       <div className="flex flex-col gap-3">
         <a
           href={`/get-moving-with-armstrong?type=${data.moveType ?? 'residential'}&origin=${data.originZip ?? ''}&dest=${data.destZip ?? ''}`}
-          className="bg-armstrong-blue block rounded-md px-6 py-3 text-center font-semibold text-white hover:bg-[#0090d0]"
+          className="bg-armstrong-blue hover:bg-armstrong-blue-hover block rounded-md px-6 py-3 text-center font-semibold text-white"
         >
           Get an exact quote
         </a>

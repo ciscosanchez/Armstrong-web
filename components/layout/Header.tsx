@@ -32,7 +32,7 @@ export function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-armstrong-dark-blue hover:bg-armstrong-grey-3 hover:text-armstrong-blue rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                  className="text-armstrong-dark-blue hover:bg-armstrong-grey-3 hover:text-armstrong-blue rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors"
                 >
                   {link.label}
                 </Link>

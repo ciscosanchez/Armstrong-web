@@ -28,7 +28,7 @@ export default function SuppliesEstimatorResultsPage() {
           </p>
           <Link
             href="/supplies-estimator"
-            className="bg-armstrong-blue inline-block rounded-lg px-8 py-3 font-semibold text-white hover:bg-[#0090d0]"
+            className="bg-armstrong-blue hover:bg-armstrong-blue-hover inline-block rounded-lg px-8 py-3 font-semibold text-white"
           >
             Go to Supplies Estimator
           </Link>

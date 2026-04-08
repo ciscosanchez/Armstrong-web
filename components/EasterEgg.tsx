@@ -39,23 +39,12 @@ const LOGO_PATH =
   'm6.665 6.726H11.666a4.962 4.962 0 0 0-3.6 1.46 5.049 5.049 0 0 0-1.104 1.658 5.087 5.087 0 0 0 1.15 5.56c.48.467 1.047.832 1.669 1.075a4.961 4.961 0 0 0 1.95.337h19.937a1.66 1.66 0 0 0 1.178-.492 1.69 1.69 0 0 0 .489-1.19v-1.68H11.666a1.662 1.662 0 0 1-1.166-.484 1.692 1.692 0 0 1-.498-1.169c0-.455.18-.892.498-1.214a1.693 1.693 0 0 1 1.203-.503h21.629v3.37l6.662-6.728Z';
 
 /**
- * Animation loop — all coordinates in 200×190 space (logo coords × 5).
- *
- * Groove 1 right end (x=155) derived from sub-path boundary at x=31 (×5).
- * Right turn exits at x=185 (37×5), the arrow/chevron region.
- * Arc entry point x=58.5 (11.7×5) matches where the large left arc begins.
- * Arc radius 57.5 gives leftmost point ≈ x=1, matching the logo's x=0 apex.
+ * Simple ellipse orbit around the logo — clockwise.
+ * ViewBox is 200×190; logo fills roughly that space.
+ * Ellipse center (100, 95), rx=106, ry=100 — just outside logo bounds.
+ * Expressed as two arcs to form a closed loop.
  */
-const LOOP_TRACK =
-  'M25,27.5 ' + // outer groove — left open end
-  'H155 ' + // → right along outer groove
-  'Q185,27.5 185,48.75 ' + // right D-turn, first half (arrow area)
-  'Q185,70 155,70 ' + // right D-turn, second half
-  'H58.5 ' + // ← left through middle / arc entry
-  'A57.5,57.5 0 0 0 58.5,185 ' + // big left arc sweeping CCW around bottom
-  'H25 ' + // ← left to bridge start
-  'V27.5 ' + // ↑ up the left bridge (open ends) back to start
-  'Z';
+const LOOP_TRACK = 'M -6,95 ' + 'A 106,100 0 1 1 206,95 ' + 'A 106,100 0 1 1 -6,95 ' + 'Z';
 
 export function EasterEgg() {
   const [visible, setVisible] = useState(false);
@@ -119,7 +108,8 @@ export function EasterEgg() {
           <svg
             viewBox="0 0 200 190"
             xmlns="http://www.w3.org/2000/svg"
-            className="h-full w-full"
+            className="h-full w-full overflow-visible"
+            overflow="visible"
             aria-hidden="true"
           >
             {/* ── Logo — real SVG path, Armstrong blue, semi-transparent ──── */}
@@ -127,36 +117,37 @@ export function EasterEgg() {
               <path d={LOGO_PATH} fill="#00A4EB" fillOpacity="0.5" />
             </g>
 
-            {/* ── Hidden animation track ─────────────────────────────────── */}
-            <path id="ee-loop" d={LOOP_TRACK} fill="none" stroke="none" />
+            <defs>
+              {/* ── Hidden animation track ──────────────────────────────── */}
+              <path id="ee-loop" d={LOOP_TRACK} />
 
-            {/*
-              ── Truck (cab faces +x → always leads with rotate="auto") ──────
-              scale(0.5): 36-unit default → 18 units wide ≈ 9% of viewBox width.
+              {/*
+                ── Truck template (in defs — not rendered at origin) ───────
+                Cab (front, +x side): x = −2 … +14
+                Box (back):           x = −22 … −2
+                scale(0.5) so it's ~18 units wide on screen
+              */}
+              <g id="ee-truck" transform="scale(0.5)">
+                {/* Cargo box */}
+                <rect x="-22" y="-9" width="20" height="13" rx="1" fill="#ffffff" />
+                {/* Armstrong-blue stripe */}
+                <rect x="-22" y="-2" width="20" height="4" fill="#00A4EB" />
+                {/* Cab */}
+                <rect x="-2" y="-9" width="16" height="12" rx="2" fill="#f0f0f0" />
+                {/* Windshield */}
+                <rect x="6" y="-8" width="5" height="6" rx="1" fill="#00A4EB" opacity="0.85" />
+                {/* Rear wheel */}
+                <circle cx="-12" cy="5" r="4" fill="#00263F" />
+                <circle cx="-12" cy="5" r="2" fill="#d0d0d0" />
+                {/* Front wheel */}
+                <circle cx="8" cy="5" r="4" fill="#00263F" />
+                <circle cx="8" cy="5" r="2" fill="#d0d0d0" />
+              </g>
+            </defs>
 
-              Cab (front, +x side):  x = −2 … +14
-              Box (back):            x = −22 … −2
-            */}
-            <g id="ee-truck" transform="scale(0.5)">
-              {/* Cargo box */}
-              <rect x="-22" y="-9" width="20" height="13" rx="1" fill="#ffffff" />
-              {/* Armstrong-blue stripe */}
-              <rect x="-22" y="-2" width="20" height="4" fill="#00A4EB" />
-              {/* Cab */}
-              <rect x="-2" y="-9" width="16" height="12" rx="2" fill="#f0f0f0" />
-              {/* Windshield */}
-              <rect x="6" y="-8" width="5" height="6" rx="1" fill="#00A4EB" opacity="0.85" />
-              {/* Rear wheel */}
-              <circle cx="-12" cy="5" r="4" fill="#00263F" />
-              <circle cx="-12" cy="5" r="2" fill="#d0d0d0" />
-              {/* Front wheel */}
-              <circle cx="8" cy="5" r="4" fill="#00263F" />
-              <circle cx="8" cy="5" r="2" fill="#d0d0d0" />
-            </g>
-
-            {/* Animate truck — 7 s per full lap */}
+            {/* Animate truck — 5 s per full lap */}
             <use href="#ee-truck">
-              <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+              <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
                 <mpath href="#ee-loop" />
               </animateMotion>
             </use>
@@ -167,7 +158,7 @@ export function EasterEgg() {
 
         <button
           onClick={dismiss}
-          className="bg-armstrong-blue focus:ring-armstrong-blue focus:ring-offset-armstrong-dark-blue rounded-full px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0090d0] focus:ring-2 focus:ring-offset-2 focus:outline-none"
+          className="bg-armstrong-blue focus:ring-armstrong-blue focus:ring-offset-armstrong-dark-blue hover:bg-armstrong-blue-hover rounded-full px-6 py-2 text-sm font-semibold text-white transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
         >
           Got it
         </button>

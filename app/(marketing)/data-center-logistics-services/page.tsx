@@ -12,37 +12,37 @@ export const metadata: Metadata = {
 
 const FEATURES = [
   {
-    icon: '🔒',
+    icon: 'protect-shield',
     title: 'Secure transport',
     description:
       'GPS-tracked, climate-controlled vehicles with chain-of-custody documentation from pickup to placement.',
   },
   {
-    icon: '🤍',
+    icon: 'badge',
     title: 'White-glove handling',
     description:
       'Anti-static packaging, ESD-safe protocols, and trained technicians for every piece of equipment.',
   },
   {
-    icon: '🔌',
+    icon: 'gear-and-arrow',
     title: 'Rack & stack installation',
     description:
       'Full cabinet installation, cable management, and equipment placement — ready for power-on.',
   },
   {
-    icon: '📋',
+    icon: 'boxes',
     title: 'Asset management',
     description:
       'Barcoded tracking, audit reports, and chain-of-custody documentation for compliance requirements.',
   },
   {
-    icon: '♻️',
+    icon: 'truck-3',
     title: 'Decommissioning & ITAD',
     description:
       'Certified data destruction, responsible recycling, and disposition — fully documented.',
   },
   {
-    icon: '🏗️',
+    icon: 'buildings',
     title: 'Data center migration',
     description:
       "End-to-end migration planning and execution. We've moved hundreds of data centers without downtime.",

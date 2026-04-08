@@ -95,7 +95,7 @@ export function ConsentBanner() {
             </button>
             <button
               onClick={() => accept({ analytics: true, marketing: true })}
-              className="bg-armstrong-blue rounded px-4 py-2 text-sm font-semibold text-white hover:bg-[#0090d0]"
+              className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded px-4 py-2 text-sm font-semibold text-white"
             >
               Accept All
             </button>
@@ -145,7 +145,7 @@ export function ConsentBanner() {
           <div className="flex gap-2">
             <button
               onClick={() => accept(draft)}
-              className="bg-armstrong-blue rounded px-5 py-2 text-sm font-semibold text-white hover:bg-[#0090d0]"
+              className="bg-armstrong-blue hover:bg-armstrong-blue-hover rounded px-5 py-2 text-sm font-semibold text-white"
             >
               Save Preferences
             </button>
