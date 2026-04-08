@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { ContactFormSchema } from '@/lib/validations/lead';
 import { checkRateLimit, getClientIp, tooManyRequestsResponse } from '@/lib/security/rateLimit';
 import { verifyCsrfToken } from '@/lib/security/csrf';
+import { detectLeadAbuse } from '@/lib/security/leadAbuse';
 import { prisma } from '@/lib/db/client';
 import { sendLeadNotification, sendLeadConfirmation } from '@/lib/email/templates';
 import { createNetSuiteLead } from '@/lib/netsuite/leads';
@@ -60,7 +61,21 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: 'Bot verification failed' }, { status: 400 });
   }
 
-  // ── 6. Server-side enrichment ─────────────────────────────
+  // ── 6. Abuse detection ───────────────────────────────────
+  const abuse = detectLeadAbuse({
+    email: data.email,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    phone: data.phone,
+  });
+
+  // Hard block: disposable email + another signal = definitely spam
+  if (abuse.signals.disposableEmail && abuse.legitimacyScore < 30) {
+    // Silent success — don't reveal detection to spammers
+    return NextResponse.json({ id: 'filtered', status: 'received' }, { status: 200 });
+  }
+
+  // ── 7. Server-side enrichment ─────────────────────────────
   const userAgent = req.headers.get('user-agent') ?? '';
   const device = detectDevice(userAgent);
   // Extract UTM params from referrer header or custom header set by TrackingProvider
@@ -70,7 +85,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const sessionId = req.cookies.get('arm_session')?.value ?? null;
   const formPage = req.headers.get('Referer');
 
-  // ── 7. Save lead to database ──────────────────────────────
+  // ── 8. Save lead to database ──────────────────────────────
+  const baseScore = calculateInitialScore({ utmSource, utmMedium, sessionId });
+  const finalScore = Math.round(baseScore * (abuse.legitimacyScore / 100));
+
   const lead = await prisma.lead.create({
     data: {
       type: data.type.toUpperCase().replace('-', '_') as
@@ -92,24 +110,26 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       sessionId,
       formPage,
       device,
-      score: calculateInitialScore({ utmSource, utmMedium, sessionId }),
+      score: finalScore,
     },
   });
 
-  // ── 8. Send emails (non-blocking) ────────────────────────
-  void sendLeadConfirmation(data.email, data.firstName, data.type).catch((err) =>
-    console.error('Lead confirmation email failed:', err),
-  );
-  void sendLeadNotification(lead).catch((err) =>
-    console.error('Lead notification email failed:', err),
-  );
+  // ── 9. Send emails (non-blocking, skip if flagged as abuse) ─
+  if (!abuse.skipEmail) {
+    void sendLeadConfirmation(data.email, data.firstName, data.type).catch((err) =>
+      console.error('Lead confirmation email failed:', err),
+    );
+    void sendLeadNotification(lead).catch((err) =>
+      console.error('Lead notification email failed:', err),
+    );
+  }
 
-  // ── 9. NetSuite sync (non-blocking, with retry on failure) ─
+  // ── 10. NetSuite sync (non-blocking, with retry on failure) ─
   void syncToNetSuite(lead.id, data, { utmSource, utmCampaign }).catch((err) =>
     console.error('NetSuite initial sync failed:', err),
   );
 
-  // ── 10. Respond ───────────────────────────────────────────
+  // ── 11. Respond ───────────────────────────────────────────
   return NextResponse.json(
     {
       id: lead.id,

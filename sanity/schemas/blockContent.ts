@@ -64,6 +64,7 @@ export const blockContent = defineType({
         },
       ],
     }),
+    defineArrayMember({ type: 'videoEmbed' }),
     defineArrayMember({
       name: 'callout',
       type: 'object',

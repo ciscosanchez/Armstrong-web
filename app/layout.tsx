@@ -4,6 +4,7 @@ import { uncutSans } from '@/lib/fonts';
 import { TrackingProvider } from '@/components/tracking/TrackingProvider';
 import { ConsentBanner } from '@/components/tracking/ConsentBanner';
 import { ChatWidget } from '@/components/layout/ChatWidget';
+import { EasterEgg } from '@/components/EasterEgg';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.css';
 
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
           <ConsentBanner />
           <ChatWidget />
+          <EasterEgg />
         </TrackingProvider>
         {ga4Id && <GoogleAnalytics gaId={ga4Id} />}
       </body>

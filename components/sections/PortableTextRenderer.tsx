@@ -76,6 +76,36 @@ const components: PortableTextComponents = {
         </figure>
       );
     },
+    videoEmbed: ({ value }) => {
+      const { url, caption, autoplay } = value as {
+        url?: string;
+        caption?: string;
+        autoplay?: boolean;
+      };
+      if (!url) return null;
+
+      const embedUrl = resolveVideoEmbedUrl(url, autoplay ?? false);
+      if (!embedUrl) return null;
+
+      return (
+        <figure className="my-8">
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-md">
+            <iframe
+              src={embedUrl}
+              title={caption ?? 'Embedded video'}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
+          {caption && (
+            <figcaption className="text-armstrong-grey-1 mt-2 text-center text-sm">
+              {caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
     callout: ({ value }) => {
       const styles: Record<string, string> = {
         info: 'border-armstrong-blue bg-armstrong-blue/5',
@@ -90,6 +120,30 @@ const components: PortableTextComponents = {
     },
   },
 };
+
+function resolveVideoEmbedUrl(url: string, autoplay: boolean): string | null {
+  const ap = autoplay ? 1 : 0;
+
+  // YouTube: youtube.com/watch?v=ID or youtu.be/ID
+  const ytMatch = url.match(/youtube\.com\/watch\?v=([\w-]+)/) ?? url.match(/youtu\.be\/([\w-]+)/);
+  if (ytMatch?.[1]) {
+    return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=${ap}&mute=${ap}&rel=0`;
+  }
+
+  // Vimeo: vimeo.com/ID
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch?.[1]) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=${ap}&muted=${ap}`;
+  }
+
+  // Mux: stream.mux.com/PLAYBACK_ID.m3u8
+  const muxMatch = url.match(/stream\.mux\.com\/([\w-]+)(?:\.m3u8)?/);
+  if (muxMatch?.[1]) {
+    return `https://stream.mux.com/${muxMatch[1]}?autoplay=${ap}`;
+  }
+
+  return null;
+}
 
 export function PortableTextRenderer({ value }: { value: unknown[] }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
