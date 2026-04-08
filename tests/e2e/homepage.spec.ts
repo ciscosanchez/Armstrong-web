@@ -39,9 +39,9 @@ test.describe('Homepage', () => {
     await expect(phoneLink).toHaveAttribute('href', 'tel:+18002887396');
   });
 
-  test('header "Get a Quote" CTA is visible on desktop', async ({ page }) => {
+  test('header "Get Started" CTA is visible on desktop', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
-    const cta = page.getByRole('link', { name: 'Get a Quote' }).first();
+    const cta = page.getByRole('link', { name: 'Get Started' }).first();
     await expect(cta).toBeVisible();
     await expect(cta).toHaveAttribute('href', '/get-moving-with-armstrong');
   });
