@@ -61,3 +61,6 @@ data/GeoLite2-City.mmdb
 # Brand assets — large PDFs/PNGs, not for public repo
 sample/
 Armstrong_BrandGuidelines_V1.pdf
+
+# Claude Code local settings
+.claude/settings.local.json
