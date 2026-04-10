@@ -2,12 +2,12 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Contact Form — /get-moving-with-armstrong', () => {
   test.beforeEach(async ({ page }) => {
-    // Accept cookies so tracking doesn't interfere
+    // Set consent cookie directly — chat widget covers the banner's Accept All button
     await page.goto('/');
-    const acceptBtn = page.getByRole('button', { name: 'Accept All' });
-    if (await acceptBtn.isVisible()) {
-      await acceptBtn.click();
-    }
+    await page.evaluate(() => {
+      const consent = encodeURIComponent(JSON.stringify({ analytics: true, marketing: true }));
+      document.cookie = `arm_consent=${consent}; path=/; max-age=31536000; SameSite=Strict`;
+    });
     await page.goto('/get-moving-with-armstrong');
   });
 
