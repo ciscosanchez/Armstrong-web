@@ -1,7 +1,7 @@
 import 'server-only';
 import { sanityClient } from './client';
 
-const sanityConfigured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const sanityConfigured = !!(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '').trim();
 
 // ---------------------------------------------------------------------------
 // Blog Posts
