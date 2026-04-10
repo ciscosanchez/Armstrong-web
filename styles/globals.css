@@ -182,6 +182,26 @@
     color: var(--color-dark-blue);
   }
 
+  /* Marquee / ticker scroll animation */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Count-up shimmer on stat numbers */
+  .stat-glow {
+    text-shadow: 0 0 40px color-mix(in srgb, var(--color-blue) 60%, transparent);
+  }
+
   /* Visually hidden — for screen readers */
   .sr-only {
     position: absolute;
