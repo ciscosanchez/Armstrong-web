@@ -47,7 +47,12 @@ export default async function ResourcesCategoryPage({ params }: Props) {
   const meta = CATEGORY_META[category];
   if (!meta) notFound();
 
-  const articles = await getBlogPosts(category);
+  let articles: Awaited<ReturnType<typeof getBlogPosts>> = [];
+  try {
+    articles = await getBlogPosts(category);
+  } catch {
+    articles = [];
+  }
 
   return (
     <>

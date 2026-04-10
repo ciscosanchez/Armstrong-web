@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlePage({ params }: Props) {
   const { category, slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug).catch(() => null);
   if (!post) notFound();
 
   const categoryLabel = CATEGORY_LABEL[category] ?? CATEGORY_LABEL[post.category] ?? post.category;
