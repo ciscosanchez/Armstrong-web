@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/db/client';
 import type { LeadStatus, LeadType } from '@prisma/client';
 import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 import { LeadStatusBadge } from '@/components/admin/LeadStatusBadge';
 import { LeadsFilterBar } from '@/components/admin/LeadsFilterBar';
 

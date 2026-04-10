@@ -1,7 +1,10 @@
 import { prisma } from '@/lib/db/client';
 import type { LeadType, LeadStatus } from '@prisma/client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AnalyticsDashboardPage() {
+  const sevenDaysAgo = new Date(Date.now() - 7 * 86400 * 1000);
   // Promise.all preserves individual query types (unlike $transaction with groupBy)
   const [totalLeads, leadsByType, leadsByStatus, recentLeads, avgScore, netsuiteSync] =
     await Promise.all([
@@ -16,7 +19,7 @@ export default async function AnalyticsDashboardPage() {
         _count: { _all: true },
         orderBy: { _count: { status: 'desc' } },
       }),
-      prisma.lead.count({ where: { createdAt: { gte: new Date(Date.now() - 7 * 86400 * 1000) } } }),
+      prisma.lead.count({ where: { createdAt: { gte: sevenDaysAgo } } }),
       prisma.lead.aggregate({ _avg: { score: true } }),
       prisma.lead.count({ where: { netsuiteId: { not: null } } }),
     ]);

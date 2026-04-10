@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/db/client';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 import { LeadStatusBadge } from '@/components/admin/LeadStatusBadge';
 import { LeadStatusSelect } from '@/components/admin/LeadStatusSelect';
 

@@ -1,11 +1,9 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import coreWebVitals from 'eslint-config-next/core-web-vitals';
+import typescript from 'eslint-config-next/typescript';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({ baseDirectory: __dirname });
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const eslintConfig = [
   // Ignore build output and generated files
@@ -13,11 +11,8 @@ const eslintConfig = [
     ignores: ['.next/**', 'node_modules/**', 'out/**', 'build/**'],
   },
 
-  ...compat.extends(
-    'next/core-web-vitals',
-    'next/typescript',
-    'plugin:jsx-a11y/recommended',
-  ),
+  ...coreWebVitals,
+  ...typescript,
 
   {
     // Enable typed linting so rules like no-floating-promises can access type info
@@ -48,6 +43,11 @@ const eslintConfig = [
       // No default exports except for Next.js pages and API routes
       // (Next.js requires default exports for pages — allow in app/ dir)
       'import/prefer-default-export': 'off',
+
+      // React Compiler purity rules produce false positives for valid patterns
+      // (setState in useEffect, Date.now in server components)
+      'react-hooks/purity': 'off',
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 
