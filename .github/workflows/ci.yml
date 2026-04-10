@@ -113,6 +113,6 @@ jobs:
           script: |
             cd ~/Armstrong-web
             git pull origin main
-            npm ci --omit=dev
+            npm install --ignore-scripts
             npm run build
             pm2 restart armstrong
