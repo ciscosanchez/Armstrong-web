@@ -192,7 +192,7 @@ export default function HomepageV2() {
               can&apos;t afford to get wrong.
             </h1>
 
-            <p className="text-armstrong-grey-2 mb-10 max-w-2xl text-lg leading-relaxed">
+            <p className="mb-10 max-w-2xl text-lg leading-relaxed text-white/80">
               Complex commercial relocations, end-to-end supply chain management, freight brokerage,
               and residential moving — all under one roof, backed by 65+ years and 33 locations
               nationwide.

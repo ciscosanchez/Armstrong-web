@@ -81,7 +81,7 @@ export default function ConceptD() {
                 <br />
                 <span className="text-armstrong-blue">behind your growth.</span>
               </h1>
-              <p className="text-armstrong-grey-1 mb-10 text-xl leading-relaxed">
+              <p className="text-armstrong-dark-blue/70 mb-10 text-xl leading-relaxed">
                 Complex commercial moves. End-to-end supply chain. Managed transportation.
                 Residential moving. One accountable partner since 1957.
               </p>
@@ -141,7 +141,7 @@ export default function ConceptD() {
                 <span className="bg-armstrong-blue mt-1.5 h-2 w-2 shrink-0 rounded-full" />
                 <div>
                   <p className="text-armstrong-dark-blue text-sm font-semibold">{t.label}</p>
-                  <p className="text-armstrong-grey-1 text-xs">{t.sub}</p>
+                  <p className="text-armstrong-dark-blue/70 text-xs">{t.sub}</p>
                 </div>
               </div>
             ))}
@@ -162,7 +162,7 @@ export default function ConceptD() {
                 <br />
                 One partner.
               </h2>
-              <p className="text-armstrong-grey-1 mt-4 text-base leading-relaxed">
+              <p className="text-armstrong-dark-blue/70 mt-4 text-base leading-relaxed">
                 From a single truckload to a full supply chain overhaul — Armstrong scales to what
                 you need.
               </p>
@@ -205,7 +205,7 @@ export default function ConceptD() {
             ].map((s) => (
               <div key={s.label} className="border-armstrong-blue border-l-2 pl-6">
                 <p className="text-armstrong-blue text-5xl font-black">{s.value}</p>
-                <p className="mt-1 font-semibold">{s.label}</p>
+                <p className="mt-1 font-semibold text-white">{s.label}</p>
                 <p className="mt-1 text-sm text-white/75">{s.body}</p>
               </div>
             ))}
@@ -226,7 +226,7 @@ export default function ConceptD() {
                 <br />
                 Every sector.
               </h2>
-              <p className="text-armstrong-grey-1 leading-relaxed">
+              <p className="text-armstrong-dark-blue/70 leading-relaxed">
                 We&apos;ve built deep expertise across industries that demand precision, compliance,
                 and zero tolerance for error.
               </p>
@@ -254,7 +254,7 @@ export default function ConceptD() {
           <h2 className="text-armstrong-dark-blue mb-6 text-4xl font-black lg:text-5xl">
             Tell us what you need to move.
           </h2>
-          <p className="text-armstrong-grey-1 mx-auto mb-10 max-w-xl text-lg">
+          <p className="text-armstrong-dark-blue/70 mx-auto mb-10 max-w-xl text-lg">
             Our team will design the right solution — whether it&apos;s one truck or a full supply
             chain overhaul.
           </p>
