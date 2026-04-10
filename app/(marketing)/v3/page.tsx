@@ -97,12 +97,12 @@ export default function ConceptA() {
           <p className="text-armstrong-blue mb-6 font-mono text-xs tracking-[0.3em] uppercase">
             Est. 1957 · 33 Locations · Nationwide
           </p>
-          <h1 className="mb-6 max-w-3xl text-5xl leading-none font-bold tracking-tight lg:text-7xl xl:text-8xl">
+          <h1 className="mb-6 max-w-3xl text-5xl leading-none font-bold tracking-tight text-white lg:text-7xl xl:text-8xl">
             We move
             <br />
             <span className="text-armstrong-blue">what matters.</span>
           </h1>
-          <p className="text-armstrong-grey-2 mb-10 max-w-lg text-xl leading-relaxed">
+          <p className="mb-10 max-w-lg text-xl leading-relaxed text-white/80">
             Supply chain. Managed transportation. Commercial relocation. Residential moving. One
             partner. Any scale.
           </p>
@@ -149,7 +149,7 @@ export default function ConceptA() {
       <section id="services" className="py-24">
         <div className="container-armstrong">
           <div className="mb-16 flex items-end justify-between">
-            <h2 className="text-4xl font-bold lg:text-5xl">
+            <h2 className="text-4xl font-bold text-white lg:text-5xl">
               What we
               <br />
               <span className="text-armstrong-blue">operate.</span>
@@ -218,7 +218,7 @@ export default function ConceptA() {
           <p className="text-armstrong-blue mb-4 font-mono text-sm tracking-widest uppercase">
             Ready to move?
           </p>
-          <h2 className="mb-8 text-4xl font-bold lg:text-6xl">
+          <h2 className="mb-8 text-4xl font-bold text-white lg:text-6xl">
             Let&apos;s talk about
             <br />
             what you need to move.

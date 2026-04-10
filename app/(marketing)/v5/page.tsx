@@ -238,12 +238,12 @@ export default function ConceptC() {
             <p className="text-armstrong-blue mb-4 text-sm font-semibold tracking-widest uppercase">
               Why Armstrong
             </p>
-            <h2 className="mb-6 text-3xl font-black lg:text-4xl">
+            <h2 className="mb-6 text-3xl font-black text-white lg:text-4xl">
               Three generations.
               <br />
               One promise.
             </h2>
-            <p className="text-armstrong-grey-2 mb-8 leading-relaxed">
+            <p className="mb-8 leading-relaxed text-white/80">
               We&apos;ve been moving what matters since 1957. From family homes to Fortune 500
               supply chains — if it&apos;s important to you, it&apos;s important to us.
             </p>
@@ -257,7 +257,7 @@ export default function ConceptC() {
       {/* ── CTA ──────────────────────────────────────────────── */}
       <section className="bg-armstrong-dark-blue py-24 text-center text-white">
         <div className="container-armstrong">
-          <h2 className="mb-6 text-5xl font-black lg:text-6xl">
+          <h2 className="mb-6 text-5xl font-black text-white lg:text-6xl">
             What do you need
             <br />
             <span className="text-armstrong-blue">to move?</span>

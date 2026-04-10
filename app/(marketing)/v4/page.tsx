@@ -69,7 +69,7 @@ export default function ConceptB() {
           {/* Bottom row */}
           <div className="flex flex-wrap items-end justify-between gap-8 pt-16">
             <div className="max-w-md">
-              <p className="text-armstrong-grey-2 text-lg leading-relaxed">
+              <p className="text-lg leading-relaxed text-white/80">
                 Supply chain. Transportation. Commercial. Residential. 65+ years. 33 locations. One
                 company that does it all — and owns every outcome.
               </p>
@@ -161,12 +161,12 @@ export default function ConceptB() {
           <p className="text-armstrong-blue mb-6 font-mono text-sm tracking-widest uppercase">
             The Armstrong Company
           </p>
-          <h2 className="mb-4 text-5xl font-black tracking-tight lg:text-7xl">
+          <h2 className="mb-4 text-5xl font-black tracking-tight text-white lg:text-7xl">
             Our world moves
             <br />
             around you.
           </h2>
-          <p className="text-armstrong-grey-2 mx-auto mb-10 max-w-lg text-lg">
+          <p className="mx-auto mb-10 max-w-lg text-lg text-white/80">
             Since 1957. Three generations. One promise.
           </p>
           <Link
