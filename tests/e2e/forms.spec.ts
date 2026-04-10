@@ -67,7 +67,9 @@ test.describe('Contact Form — /get-moving-with-armstrong', () => {
 
     await page.getByRole('button', { name: /submit|send|get.*quote/i }).click();
 
-    await expect(page.getByRole('alert')).toBeVisible();
+    await expect(
+      page.getByRole('alert').filter({ hasText: /something went wrong/i }),
+    ).toBeVisible();
   });
 });
 
